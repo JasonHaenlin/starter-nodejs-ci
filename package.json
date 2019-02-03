@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "mocha tests/ -R spec --recursive --exit",
-    "eslint": "./node_modules/.bin/eslint",
+    "eslint": "./node_modules/.bin/eslint .",
     "dev": "nodemon -e js -w ./ ./server.js",
     "start": "node --trace-warnings ./server.js",
     "knex": "knex",
