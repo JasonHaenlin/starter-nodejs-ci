@@ -13,17 +13,13 @@ pipeline {
     stage('Install') {
       steps {
         echo 'Install Dependencies'
-        dir('./back/'){
-          sh 'npm install'
-        }
+        sh 'npm install'
       }
     }
     stage('Lint') {
       steps {
         echo 'javascript Linter'
-        dir('./back/'){
-          sh 'npm run eslint'
-        }
+        sh 'npm run eslint'
       }
     }
     stage('Migrate') {
@@ -32,28 +28,22 @@ pipeline {
       }
       steps {
         echo 'Knex migration'
-        dir('./back/'){
-          sh 'npm run knex migrate:rollback'
-          sh 'npm run knex migrate:latest'
-          sh 'npm run knex seed:run'
-        }
+        sh 'npm run knex migrate:rollback'
+        sh 'npm run knex migrate:latest'
+        sh 'npm run knex seed:run'
       }
     }
     stage('Test') {
       steps {
         echo 'Test'
-        dir('./back/'){
-          sh 'npm run coverage'
-        }
+        sh 'npm run coverage'
       }
     }
     stage('Sonar') {
       steps {
         echo 'Sonar Analysis'
         withSonarQubeEnv('Sonarqube_env'){
-          dir('./back'){
-            sh 'npm run sonar'
-          }
+          sh 'npm run sonar'
         }
       }
     }
@@ -80,11 +70,9 @@ pipeline {
           }
           steps {
             echo 'Database updated'
-            dir('./back/'){
-              sh 'npm run knex migrate:rollback'
-              sh 'npm run knex migrate:latest'
-              sh 'npm run knex seed:run'
-            }
+            sh 'npm run knex migrate:rollback'
+            sh 'npm run knex migrate:latest'
+            sh 'npm run knex seed:run'
           }
         }
         stage('App Deployment') {
