@@ -34,6 +34,9 @@ pipeline {
       }
     }
     stage('Test') {
+      environment {
+        NODE_ENV= 'development'
+      }
       steps {
         echo 'Test'
         sh 'npm run coverage'
@@ -120,7 +123,7 @@ pipeline {
         color: 'danger',
         token: env.SLACK_TOKEN,
         message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' was failed\n ' +
-        env.GIT_COMMITTER_NAME + 'has done something wrong',
+        env.GIT_COMMITTER_NAME + ' has done something wrong',
         baseUrl: env.SLACK_WEBHOOK)
 
       echo 'JENKINS PIPELINE FAILED'

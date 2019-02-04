@@ -35,6 +35,6 @@ module.exports = {
     logger.log('error', error);
   },
   LogTheInfo: (info) => {
-    logger.info('info', info);
+    logger.log('info', info);
   }
 };

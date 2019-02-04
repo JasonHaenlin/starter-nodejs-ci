@@ -20,7 +20,21 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(config.port, config.host);
+let port = null;
+let host = null;
+
+switch (process.env.NODE_ENV) {
+  case 'production':
+    port = config.production.port;
+    host = config.production.host;
+    break;
+  default:
+    port = config.development.port;
+    host = config.development.host;
+    break;
+}
+
+server.listen(port, host);
 
 /**
  * Event listener for HTTP server "listening" event.
