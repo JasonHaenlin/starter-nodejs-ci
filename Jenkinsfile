@@ -113,49 +113,50 @@ pipeline {
     }
 
     success {
-      // slackSend(
-      //   channel: 'otake',
-      //   failOnError: true,
-      //   color: 'good',
-      //   token: env.SLACK_TOKEN,
-      //   message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' was successful\n App Deployed.',
-      //   baseUrl: env.SLACK_WEBHOOK)
+      slackSend(
+        channel: 'otake',
+        failOnError: true,
+        color: 'good',
+        token: env.SLACK_TOKEN,
+        message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' was successful\n App Deployed.',
+        baseUrl: env.SLACK_WEBHOOK)
+
       echo 'JENKINS PIPELINE SUCCESSFUL'
     }
 
     failure {
-      // slackSend(
-      //   channel: 'otake',
-      //   failOnError: true,
-      //   color: 'danger',
-      //   token: env.SLACK_TOKEN,
-      //   message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' was failed\n ' +
-      //   env.GIT_COMMITTER_NAME + 'has done something wrong',
-      //   baseUrl: env.SLACK_WEBHOOK)
+      slackSend(
+        channel: 'otake',
+        failOnError: true,
+        color: 'danger',
+        token: env.SLACK_TOKEN,
+        message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' was failed\n ' +
+        env.GIT_COMMITTER_NAME + 'has done something wrong',
+        baseUrl: env.SLACK_WEBHOOK)
 
       echo 'JENKINS PIPELINE FAILED'
     }
 
     unstable {
-      // slackSend(
-      //   channel: 'otake',
-      //   failOnError: true,
-      //   color: 'warning',
-      //   token: env.SLACK_TOKEN,
-      //   message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' was unstable',
-      //   baseUrl: env.SLACK_WEBHOOK)
+      slackSend(
+        channel: 'otake',
+        failOnError: true,
+        color: 'warning',
+        token: env.SLACK_TOKEN,
+        message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' was unstable',
+        baseUrl: env.SLACK_WEBHOOK)
 
       echo 'JENKINS PIPELINE WAS MARKED AS UNSTABLE'
     }
 
     changed {
-      // slackSend(
-      //   channel: 'otake',
-      //   failOnError: true,
-      //   color: 'danger',
-      //   token: env.SLACK_TOKEN,
-      //   message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' its resulat was unclear',
-      //   baseUrl: env.SLACK_WEBHOOK)
+      slackSend(
+        channel: 'otake',
+        failOnError: true,
+        color: 'danger',
+        token: env.SLACK_TOKEN,
+        message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' its resulat was unclear',
+        baseUrl: env.SLACK_WEBHOOK)
 
       echo 'JENKINS PIPELINE STATUS HAS CHANGED SINCE LAST EXECUTION'
     }
