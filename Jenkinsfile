@@ -109,6 +109,7 @@ pipeline {
   }
   post {
     always {
+      archiveArtifacts artifacts: 'coverage/**/*', fingerprint: true
       echo 'JENKINS PIPELINE'
     }
 
