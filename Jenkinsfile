@@ -110,7 +110,7 @@ pipeline {
         failOnError: true,
         color: 'good',
         token: env.SLACK_TOKEN,
-        message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' was successful\n App Deployed.',
+        message: 'Job: ' + env.JOB_NAME + ' with buildnumber ' + env.BUILD_NUMBER + ' was successful',
         baseUrl: env.SLACK_WEBHOOK)
 
       echo 'JENKINS PIPELINE SUCCESSFUL'
