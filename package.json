@@ -14,7 +14,10 @@
     "start": "node --trace-warnings ./server.js",
     "knex": "knex",
     "sonar": "gulp sonar",
-    "coverage": "nyc mocha tests/ -R spec --recursive --exit"
+    "coverage": "nyc mocha tests/ -R spec --recursive --exit",
+    "deploy": "pm2 start server.js -e log/err.log -o log/out.log --log-date-format \"YYYY-MM-DD HH:mm Z\" --name nodejs-ps6",
+    "stop": "pm2 stop nodejs-ps6 || echo 'fail to stop nodejs-ps6 process'",
+    "redeploy": "pm2 restart nodejs-ps6 || npm run deploy"
   },
   "keywords": [
     "nodejs",
@@ -39,8 +42,9 @@
     "nodemon": "^1.18.9",
     "nyc": "^13.1.0",
     "sonarqube-scanner": "^2.1.2",
-    "supertest": "^3.4.2",
-    "winston": "^3.2.1"
+    "sqlite3": "^4.0.6",
+    "migrate": "^1.6.2",
+    "supertest": "^3.4.2"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -49,12 +53,11 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "knex": "^0.16.3",
-    "migrate": "^1.6.2",
     "module-alias": "^2.1.0",
     "morgan": "^1.9.1",
     "objection": "^1.5.3",
     "pg": "^7.8.0",
-    "sqlite3": "^4.0.6"
+    "winston": "^3.2.1"
   },
   "nyc": {
     "reporter": [
