@@ -146,6 +146,45 @@ to make another query you can use the *$relatedQuery* property
     - name
 The author is link to author_id like described in the relation mapping in the model.
 
+### more complex examples
+```js
+getAllTickets() {
+    // select * from ticket = Ticket.query();
+    return Ticket.query()
+      .alias('t')
+      .select('t.id', 't.title', 't.description', 'author.name')
+      .joinRelation('author');
+    // .where({ 'a.id': 1 }); //the same
+    // .where('a.id', 1);
+  },
+
+  getTicketsById(id) {
+    return Ticket.query()
+      .where({ 'ticket.id': id });
+  },
+
+  createTicket(ticket) {
+    return Ticket.query()
+      .allowInsert('[title, description, author_id]')
+      .insert(ticket);
+  },
+
+  updateTicket(ticket, id) {
+    return Ticket.query()
+      .patchAndFetchById(id, ticket);
+    // .where('id', id);
+    // .returning('*');
+  },
+
+  deleteTicket(id) {
+    return Ticket.query()
+      .delete()
+      .where({ id: id })
+      .returning('*');
+    // .deleteById(id);
+  }
+```
+
 ## Inspiration
 well, alot of documention about nodejs, javscript, express and npm but also from:
 - https://github.com/saiumesh535/express-zero-config

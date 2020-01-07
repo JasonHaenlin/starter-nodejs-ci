@@ -1,14 +1,13 @@
 /**
  * Module dependencies.
  */
-require('module-alias/register');
 require('dotenv').config();
 
 const http = require('http');
-const config = require('@config').server;
-const LogTheInfo = require('@config').logger.LogTheInfo;
-const logTheError = require('@config').logger.logTheError;
-const app = require('./app/index.js');
+const config = require('./app/config').server;
+const LogTheInfo = require('./app/config').logger.LogTheInfo;
+const logTheError = require('./app/config').logger.logTheError;
+const app = require('./app');
 
 /**
  * Create HTTP server.
@@ -19,19 +18,11 @@ const server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
-let port = null;
-let host = null;
-
-switch (process.env.NODE_ENV) {
-  case 'production':
-    port = config.production.port;
-    host = config.production.host;
-    break;
-  default:
-    port = config.development.port;
-    host = config.development.host;
-    break;
+let port = 3000;
+let host = '127.0.0.1';
+if (config[process.env.NODE_ENV]) {
+  port = config[process.env.NODE_ENV].port;
+  host = config[process.env.NODE_ENV].host;
 }
 
 server.listen(port, host);
@@ -41,9 +32,7 @@ server.listen(port, host);
  */
 
 const onListening = () => {
-  let addr = config.host || '127.0.0.1';
-  let port = config.port || '3000';
-  LogTheInfo('Listening on ' + addr + ':' + port);
+  LogTheInfo('Listening on ' + host + ':' + port);
 };
 
 /**
@@ -55,16 +44,14 @@ const onError = (error) => {
     throw error;
   }
 
-  let bind = config.port || '3000';
-
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      logTheError(bind + ' requires elevated privileges');
+      logTheError(port + ' requires elevated privileges');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      logTheError(bind + ' is already in use');
+      logTheError(port + ' is already in use');
       process.exit(1);
       break;
     default:
@@ -76,8 +63,9 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 // just in case a issue occur
+// eslint-disable-next-line no-unused-vars
 process.on('unhandledRejection', (reason, promise) => {
-  logTheError('Unhandled Rejection at:', reason.stack || reason);
+  logTheError('Unhandled Rejection at : ' + reason);
 });
 
-module.exports = { server, app };
+module.exports = { app };

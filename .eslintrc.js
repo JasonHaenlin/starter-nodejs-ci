@@ -1,4 +1,4 @@
-{
+module.exports = {
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -8,41 +8,12 @@
     "promise",
     "security"
   ],
-  "ecmaFeatures": {
-    "arrowFunctions": true,
-    "binaryLiterals": true,
-    "blockBindings": true,
-    "classes": true,
-    "defaultParams": true,
-    "destructuring": true,
-    "forOf": true,
-    "generators": true,
-    "modules": true,
-    "objectLiteralComputedProperties": true,
-    "objectLiteralDuplicateProperties": true,
-    "objectLiteralShorthandMethods": true,
-    "objectLiteralShorthandProperties": true,
-    "octalLiterals": true,
-    "regexUFlag": true,
-    "regexYFlag": true,
-    "spread": true,
-    "superInFunctions": true,
-    "templateStrings": true,
-    "unicodeCodePointEscapes": true,
-    "globalReturn": true,
-    "jsx": true
-  },
   "extends": [
     "eslint:recommended",
     "plugin:promise/recommended",
     "plugin:security/recommended"
   ],
   "rules": {
-    //
-    //Possible Errors
-    //
-    // The following rules point out areas where you might have made mistakes.
-    //
     "comma-dangle": 2, // disallow or enforce trailing commas
     "no-cond-assign": 2, // disallow assignment in conditional expressions
     "no-console": 0, // disallow use of console (off by default in the node environment)
@@ -70,13 +41,7 @@
     "use-isnan": 2, // disallow comparisons with the value NaN
     "valid-jsdoc": 0, // Ensure JSDoc comments are valid (off by default)
     "valid-typeof": 2, // Ensure that the results of typeof are compared against a valid string
-    //
-    // Best Practices
-    //
-    // These are rules designed to prevent you from making mistakes.
-    // They either prescribe a better way of doing something or help you avoid footguns.
-    //
-    "block-scoped-var": 0, // treat var statements as if they were block scoped (off by default). 0: deep destructuring is not compatible https://github.com/eslint/eslint/issues/1863
+    "block-scoped-var": 0, // treat var statements as if they were block scoped (off by default). 0:
     "complexity": 0, // specify the maximum cyclomatic complexity allowed in a program (off by default)
     "consistent-return": 0, // require return statements to either always or never specify values
     "curly": 2, // specify curly brace conventions for all control statements
@@ -116,32 +81,13 @@
     "no-throw-literal": 2, // restrict what can be thrown as an exception (off by default)
     "no-unused-expressions": 0, // disallow usage of expressions in statement position
     "no-void": 2, // disallow use of void operator (off by default)
-    "no-warning-comments": [
-      0,
-      {
-        "terms": [
-          "todo",
-          "fixme"
-        ],
-        "location": "start"
-      }
-    ], // disallow usage of configurable warning terms in comments": 2, // e.g. TODO or FIXME (off by default)
+    "no-warning-comments": [0, { "terms": ["todo", "fixme"], "location": "start" }], // disallow usage of configurable warning terms in comments": 2,
     "no-with": 2, // disallow use of the with statement
     "radix": 2, // require use of the second argument for parseInt() (off by default)
     "vars-on-top": 2, // requires to declare all vars on top of their containing scope (off by default)
     "wrap-iife": 2, // require immediate function invocation to be wrapped in parentheses (off by default)
     "yoda": 2, // require or disallow Yoda conditions
-    //
-    // Strict Mode
-    //
-    // These rules relate to using strict mode.
-    //
     "strict": 0, // controls location of Use Strict Directives. 0: required by `babel-eslint`
-    //
-    // Variables
-    //
-    // These rules have to do with variable declarations.
-    //
     "no-catch-shadow": 2, // disallow the catch clause parameter name being the same as a variable in the outer scope (off by default in the node environment)
     "no-delete-var": 2, // disallow deletion of variables
     "no-label-var": 2, // disallow labels that share a name with a variable
@@ -149,172 +95,53 @@
     "no-undef-init": 2, // disallow use of undefined when initializing variables
     "no-undefined": 2, // disallow use of undefined variable (off by default)
     "no-unused-vars": 1, // disallow declaration of variables that are not used in the code
-    //
-    //Stylistic Issues
-    //
-    // These rules are purely matters of style and are quite subjective.
-    //
-    "indent": [
-      1,
-      2,
-      {
-        "SwitchCase": 1
-      }
-    ], // this option sets a specific tab width for your code (off by default)
+    "indent": [1, 2, { "SwitchCase": 1 }], // this option sets a specific tab width for your code (off by default)
     "brace-style": 1, // enforce one true brace style (off by default)
-    "comma-spacing": [
-      1,
-      {
-        "before": false,
-        "after": true
-      }
-    ], // enforce spacing before and after comma
-    "comma-style": [
-      1,
-      "last"
-    ], // enforce one true comma style (off by default)
-    "consistent-this": [
-      1,
-      "_this"
-    ], // enforces consistent naming when capturing the current execution context (off by default)
+    "comma-spacing": [1, { "before": false, "after": true }], // enforce spacing before and after comma
+    "comma-style": [1, "last"], // enforce one true comma style (off by default)
+    "consistent-this": [1, "_this"], // enforces consistent naming when capturing the current execution context (off by default)
     "eol-last": 1, // enforce newline at the end of file, with no multiple empty lines
     "func-names": 2, // require function expressions to have a name (off by default)
     "func-style": 1, // enforces use of function declarations or expressions (off by default)
-    "key-spacing": [
-      1,
-      {
-        "beforeColon": false,
-        "afterColon": true
-      }
-    ], // enforces spacing between keys and values in object literal properties
-    "max-nested-callbacks": [
-      1,
-      5
-    ], // specify the maximum depth callbacks can be nested (off by default)
-    "new-cap": [
-      1,
-      {
-        "newIsCap": true,
-        "capIsNew": false
-      }
-    ], // require a capital letter for constructors
+    "key-spacing": [1, { "beforeColon": false, "afterColon": true }], // enforces spacing between keys and values in object literal properties
+    "max-nested-callbacks": [1, 5], // specify the maximum depth callbacks can be nested (off by default)
+    "new-cap": [1, { "newIsCap": true, "capIsNew": false }], // require a capital letter for constructors
     "new-parens": 1, // disallow the omission of parentheses when invoking a constructor with no arguments
     "newline-after-var": 0, // allow/disallow an empty newline after var statement (off by default)
     "no-array-constructor": 1, // disallow use of the Array constructor
     "no-inline-comments": 1, // disallow comments inline after code (off by default)
     "no-lonely-if": 1, // disallow if as the only statement in an else block (off by default)
     "no-mixed-spaces-and-tabs": 1, // disallow mixed spaces and tabs for indentation
-    "no-multiple-empty-lines": [
-      1,
-      {
-        "max": 2
-      }
-    ], // disallow multiple empty lines (off by default)
+    "no-multiple-empty-lines": [1, { "max": 2 }], // disallow multiple empty lines (off by default)
     "no-nested-ternary": 0, // disallow nested ternary expressions (off by default)
     "no-new-object": 1, // disallow use of the Object constructor
     "no-spaced-func": 1, // disallow space between function identifier and application
     "no-ternary": 0, // disallow the use of ternary operators (off by default)
     "no-trailing-spaces": 1, // disallow trailing whitespace at the end of lines
     "no-underscore-dangle": 1, // disallow dangling underscores in identifiers
-    "one-var": [
-      1,
-      "never"
-    ], // allow just one var statement per function (off by default)
-    "operator-assignment": [
-      1,
-      "never"
-    ], // require assignment operator shorthand where possible or prohibit it entirely (off by default)
-    "padded-blocks": [
-      1,
-      "never"
-    ], // enforce padding within blocks (off by default)
-    "quote-props": [
-      1,
-      "as-needed"
-    ], // require quotes around object literal property names (off by default)
-    "quotes": [
-      1,
-      "single"
-    ], // specify whether double or single quotes should be used
-    "semi": [
-      1,
-      "always"
-    ], // require or disallow use of semicolons instead of ASI
-    "semi-spacing": [
-      1,
-      {
-        "before": false,
-        "after": true
-      }
-    ], // enforce spacing before and after semicolons
+    "one-var": [1, "never"], // allow just one var statement per function (off by default)
+    "operator-assignment": [1, "never"], // require assignment operator shorthand where possible or prohibit it entirely (off by default)
+    "padded-blocks": [1, "never"], // enforce padding within blocks (off by default)
+    "quote-props": [1, "as-needed"], // require quotes around object literal property names (off by default)
+    "quotes": [1, "single"], // specify whether double or single quotes should be used
+    "semi": [1, "always"], // require or disallow use of semicolons instead of ASI
+    "semi-spacing": [1, { "before": false, "after": true }], // enforce spacing before and after semicolons
     "sort-vars": 0, // sort variables within the same declaration block (off by default)
-    "space-before-blocks": [
-      1,
-      "always"
-    ], // require or disallow space before blocks (off by default)
-    "space-before-function-paren": [
-      1,
-      {
-        "anonymous": "always",
-        "named": "never"
-      }
-    ], // require or disallow space before function opening parenthesis (off by default)
-    "computed-property-spacing": [
-      2,
-      "never"
-    ],
-    "array-bracket-spacing": [
-      2,
-      "never"
-    ],
-    "space-in-parens": [
-      1,
-      "never"
-    ], // require or disallow spaces inside parentheses (off by default)
-    "space-unary-ops": [
-      1,
-      {
-        "words": true,
-        "nonwords": false
-      }
-    ], // Require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
-    "spaced-comment": [
-      2,
-      "always"
-    ], // require or disallow a space immediately following the // in a line comment (off by default)
+    "space-before-blocks": [1, "always"], // require or disallow space before blocks (off by default)
+    "space-before-function-paren": [1, { "anonymous": "always", "named": "never" }], // require or disallow space before function opening parenthesis (off by default)
+    "computed-property-spacing": [2, "never"],
+    "array-bracket-spacing": [2, "never"],
+    "space-in-parens": [1, "never"], // require or disallow spaces inside parentheses (off by default)
+    "space-unary-ops": [1, { "words": true, "nonwords": false }], // Require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
+    "spaced-comment": [2, "always"], // require or disallow a space immediately following the // in a line comment (off by default)
     "wrap-regex": 0, // require regex literals to be wrapped in parentheses (off by default)
-    //
-    // ECMAScript 6
-    //
-    // These rules are only relevant to ES6 environments and are off by default.
-    //
     "no-var": 2, // require let or const instead of var (off by default)
-    "generator-star-spacing": [
-      2,
-      "before"
-    ], // enforce the spacing around the * in generator functions (off by default)
-    //
-    // Legacy
-    //
-    // The following rules are included for compatibility with JSHint and JSLint.
-    // While the names of the rules may not match up with the JSHint/JSLint counterpart,
-    // the functionality is the same.
-    //
-    "max-depth": [
-      2,
-      3
-    ], // specify the maximum depth that blocks can be nested (off by default)
-    "max-len": [
-      2,
-      135,
-      2
-    ], // specify the maximum length of a line in your program (off by default)
-    "max-params": [
-      2,
-      5
-    ], // limits the number of parameters that can be used in the function declaration. (off by default)
+    "generator-star-spacing": [2, "before"], // enforce the spacing around the * in generator functions (off by default)
+    "max-depth": [2, 3], // specify the maximum depth that blocks can be nested (off by default)
+    "max-len": [2, 135, 2], // specify the maximum length of a line in your program (off by default)
+    "max-params": [2, 5], // limits the number of parameters that can be used in the function declaration. (off by default)
     "max-statements": 0, // specify the maximum number of statement allowed in a function (off by default)
     "no-bitwise": 0, // disallow use of bitwise operators (off by default)
-    "no-plusplus": 2, // disallow use of unary operators, ++ and -- (off by default)
+    "no-plusplus": 0, // disallow use of unary operators, ++ and -- (off by default)
   }
-}
+};

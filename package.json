@@ -2,61 +2,58 @@
   "name": "projet-semestre-6-otake-back",
   "version": "1.0.0",
   "description": "Web project using Nodejs for backend",
-  "main": "index.js",
-  "author": {
-    "name": "Jason Haenlin",
-    "email": "contact@jareon.fr"
-  },
+  "main": "server.js",
+  "private": true,
   "scripts": {
     "test": "mocha tests/ -R spec --recursive --exit",
-    "eslint": "./node_modules/.bin/eslint .",
-    "dev": "nodemon -e js -w ./ ./server.js",
+    "lint": "./node_modules/.bin/eslint -c .eslintrc.js app/",
+    "lint:fix": "./node_modules/.bin/eslint -c .eslintrc.js app/ --fix",
+    "dev": "npm run km && nodemon -e js -w ./ ./server.js",
     "start": "node --trace-warnings ./server.js",
     "knex": "knex",
+    "km": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "sonar": "gulp sonar",
     "coverage": "nyc mocha tests/ -R spec --recursive --exit",
-    "deploy": "pm2 start server.js -e log/err.log -o log/out.log --log-date-format \"YYYY-MM-DD HH:mm Z\" --name nodejs-ps6",
+    "deploy": "pm2 start server.js --log-date-format \"YYYY-MM-DD HH:mm Z\" --name nodejs-ps6",
     "stop": "pm2 stop nodejs-ps6 || echo 'fail to stop nodejs-ps6 process'",
-    "redeploy": "pm2 restart nodejs-ps6 || npm run deploy"
+    "redeploy": "pm2 restart nodejs-ps6 || npm run deploy",
+    "doc": "apidoc -i  app/routes -o ../doc/express/"
   },
-  "keywords": [
-    "nodejs",
-    "mocha",
-    "postgresql",
-    "jenkins",
-    "ps6",
-    "polytech",
-    "Exchange Student"
-  ],
+  "contributors": [],
   "license": "ISC",
   "pre-commit": [
-    "eslint"
+    "lint"
   ],
   "devDependencies": {
+    "apidoc": "^0.17.7",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.12.1",
+    "eslint": "^5.15.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-security": "^1.4.0",
     "gulp": "^4.0.0",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.18.9",
-    "nyc": "^13.1.0",
-    "sonarqube-scanner": "^2.1.2",
-    "sqlite3": "^4.0.6",
     "migrate": "^1.6.2",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.10",
+    "nyc": "^14.0.0",
+    "pre-commit": "^1.2.2",
+    "sonarqube-scanner": "^2.4.0",
+    "sqlite3": "^4.0.6",
     "supertest": "^3.4.2"
   },
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
+    "@hapi/joi": "^15.0.1",
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
-    "knex": "^0.16.3",
-    "module-alias": "^2.1.0",
-    "morgan": "^1.9.1",
-    "objection": "^1.5.3",
-    "pg": "^7.8.0",
+    "express-session": "^1.16.1",
+    "knex": "^0.19.5",
+    "objection": "^1.6.3",
+    "passport": "^0.4.0",
+    "pg": "^7.8.1",
+    "snyk": "^1.234.0",
+    "uuid": "^3.3.2",
     "winston": "^3.2.1"
   },
   "nyc": {
@@ -71,12 +68,5 @@
     "exclude": [
       "tests/**/*.spec.js"
     ]
-  },
-  "_moduleAliases": {
-    "@root": ".",
-    "@config": "app/config",
-    "@orm": "app/middlewares/orm",
-    "@utils": "app/utils",
-    "@controller": "app/controller"
   }
 }

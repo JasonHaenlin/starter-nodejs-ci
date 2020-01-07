@@ -1,18 +1,16 @@
 const { createLogger, format, transports } = require('winston');
 
 const logger = createLogger({
-  level: 'info',
   format: format.combine(
     format.timestamp({
       format: 'YYYY-MM-DD HH:mm:ss'
     }),
     format.errors({ stack: true }),
-    format.splat(),
-    format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`)
+    format.json(),
   ),
   transports: [
-    new transports.File({ filename: './log/error.log', level: 'error', maxsize: 2000 }),
-    new transports.File({ filename: './log/combined.log', maxsize: 2000 })
+    new transports.File({ filename: './log/error.log', level: 'error', maxsize: 5242880, maxFiles: 5 }),
+    new transports.File({ filename: './log/trace.log', maxsize: 5242880, maxFiles: 5 })
   ]
 });
 
@@ -30,11 +28,13 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = {
-  /* logging the errors */
   logTheError: (error) => {
     logger.log('error', error);
   },
   LogTheInfo: (info) => {
     logger.log('info', info);
+  },
+  LogTheTransaction: (id, info, status = 'info',) => {
+    logger.log(status, `transactionId = ${id} -- ${info}`);
   }
 };

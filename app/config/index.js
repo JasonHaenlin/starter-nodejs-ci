@@ -3,7 +3,7 @@ require('dotenv').config();
 const environment = process.env.NODE_ENV || 'development';
 // require environment's settings from knexfile
 // eslint-disable-next-line security/detect-object-injection
-const configuration = require('@root/knexfile')[environment];
+const configuration = require('../../knexfile')[environment];
 // connect to DB via knex using env's settings
 const database = require('knex')(configuration);
 // winston logger
@@ -11,11 +11,14 @@ const logger = require('./logger');
 
 module.exports = {
   server: {
-    host: '127.0.0.1',
-    port: 3000
-  },
-  backend: {
-    url: 'http://localhost:3000'
+    development: {
+      host: '127.0.0.1',
+      port: 3000
+    },
+    production: {
+      host: '127.0.0.1',
+      port: 9004
+    }
   },
   database,
   logger

@@ -1,7 +1,5 @@
 require('dotenv').config();
 const gulp = require('gulp');
-// const istanbul = require('gulp-istanbul');
-// const mocha = require('gulp-mocha');
 const sonarqubeScanner = require('sonarqube-scanner');
 
 gulp.task('sonar', (callback) => {
@@ -9,7 +7,7 @@ gulp.task('sonar', (callback) => {
     serverUrl: process.env.SONAR_HOST_URL,
     token: process.env.SONAR_AUTH_TOKEN,
     options: {
-      'sonar.projectKey': 'ps6-otake-back',
+      'sonar.projectKey': 'ps7-al-ihm1',
       'sonar.sources': 'app',
       'sonar.tests': 'tests',
       'sonar.test.inclusions': '**/*.spec.js',
